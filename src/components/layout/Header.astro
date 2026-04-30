@@ -25,6 +25,7 @@ const { active, homeBase = '/' } = Astro.props;
       <Icon name="arrow-right" size={14} />
     </a>
 
+    <!-- Hamburger: two-line minimal design -->
     <button
       class="menu-btn"
       id="menuBtn"
@@ -33,83 +34,82 @@ const { active, homeBase = '/' } = Astro.props;
       aria-controls="navSidebar"
       type="button"
     >
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+      <span class="hb-line hb-top"></span>
+      <span class="hb-line hb-bot"></span>
     </button>
   </div>
 </header>
 
-<!-- Mobile sidebar overlay -->
+<!-- Backdrop — pointer-events controlled by JS -->
 <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
-<!-- Mobile sidebar -->
-<nav
-  class="nav-sidebar"
-  id="navSidebar"
-  aria-label="Mobile navigation"
-  aria-hidden="true"
->
-  <ul class="sidebar-links">
-    <li><a href={homeBase} aria-current={active === 'home' ? 'page' : undefined}>Home</a></li>
-    <li><a href={`${homeBase}#about`} aria-current={active === 'about' ? 'page' : undefined}>About</a></li>
-    <li><a href={`${homeBase}#services`} aria-current={active === 'services' ? 'page' : undefined}>Services</a></li>
-    <li><a href="/contact" aria-current={active === 'contact' ? 'page' : undefined}>Contact</a></li>
-  </ul>
-  <div class="sidebar-cta">
-    <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center;">
+<!-- Sidebar drawer -->
+<aside class="nav-sidebar" id="navSidebar" aria-label="Mobile navigation" aria-hidden="true">
+  <nav>
+    <ul class="sidebar-links">
+      <li><a href={homeBase} aria-current={active === 'home' ? 'page' : undefined}>Home</a></li>
+      <li><a href={`${homeBase}#about`} aria-current={active === 'about' ? 'page' : undefined}>About</a></li>
+      <li><a href={`${homeBase}#services`} aria-current={active === 'services' ? 'page' : undefined}>Services</a></li>
+      <li><a href="/contact" aria-current={active === 'contact' ? 'page' : undefined}>Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="/contact" class="btn btn-primary sidebar-cta-btn">
       Get Started
       <Icon name="arrow-right" size={14} />
     </a>
-    <a href={`${SITE.waLink}?text=${encodeURIComponent("Hi, I'd like a free consultation")}`} target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="width:100%;justify-content:center;">
-      WhatsApp
+    <a
+      href={`${SITE.waLink}?text=${encodeURIComponent("Hi, I'd like a free consultation")}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="sidebar-wa"
+    >
+      <Icon name="whatsapp" size={16} />
+      WhatsApp us
     </a>
   </div>
-</nav>
+</aside>
 
 <script>
   import '~/lib/header-scroll';
 
-  const btn = document.getElementById('menuBtn') as HTMLButtonElement | null;
+  const btn    = document.getElementById('menuBtn')    as HTMLButtonElement | null;
   const sidebar = document.getElementById('navSidebar') as HTMLElement | null;
   const backdrop = document.getElementById('navBackdrop') as HTMLElement | null;
 
-  function openMenu() {
+  function open() {
     if (!btn || !sidebar || !backdrop) return;
-    btn.classList.add('open');
-    sidebar.classList.add('open');
-    backdrop.classList.add('open');
+    btn.classList.add('is-open');
+    sidebar.classList.add('is-open');
+    // Show backdrop with pointer-events only when open
+    backdrop.style.display = 'block';
+    requestAnimationFrame(() => backdrop.classList.add('is-open'));
     btn.setAttribute('aria-expanded', 'true');
     btn.setAttribute('aria-label', 'Close menu');
     sidebar.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeMenu() {
+  function close() {
     if (!btn || !sidebar || !backdrop) return;
-    btn.classList.remove('open');
-    sidebar.classList.remove('open');
-    backdrop.classList.remove('open');
+    btn.classList.remove('is-open');
+    sidebar.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    // Hide backdrop after transition ends
+    backdrop.addEventListener('transitionend', () => {
+      if (!backdrop.classList.contains('is-open')) backdrop.style.display = 'none';
+    }, { once: true });
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-label', 'Open menu');
     sidebar.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
-  btn?.addEventListener('click', () => {
-    btn.classList.contains('open') ? closeMenu() : openMenu();
-  });
-
-  backdrop?.addEventListener('click', closeMenu);
-
-  sidebar?.querySelectorAll('a').forEach((a) => {
-    a.addEventListener('click', closeMenu);
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && btn?.classList.contains('open')) {
-      closeMenu();
-      btn.focus();
-    }
+  btn?.addEventListener('click', () => btn.classList.contains('is-open') ? close() : open());
+  backdrop?.addEventListener('click', close);
+  sidebar?.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && btn?.classList.contains('is-open')) { close(); btn.focus(); }
   });
 </script>

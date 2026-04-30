@@ -239,116 +239,177 @@ section { padding: clamp(72px, 9vw, 130px) 0; position: relative; }
 .nav-links a:hover,
 .nav-links a[aria-current="page"] { color: var(--ink); background: var(--bg-soft); }
 
-/* Hamburger button — 3 animated bars */
+/* ====== Hamburger — two-line minimal design ====== */
 .menu-btn {
   display: none;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 1.5px solid var(--line-strong);
-  background: #fff;
-  color: var(--ink);
+  align-items: flex-end;     /* right-align for asymmetric look */
+  gap: 7px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  padding: 0;
+  position: relative;
 }
-.menu-btn:hover {
-  background: var(--bg-soft);
-  border-color: var(--ink-mute);
-  box-shadow: var(--sh-1);
-}
-.menu-btn .bar {
+
+.hb-line {
   display: block;
-  width: 20px;
-  height: 2px;
+  height: 1.5px;
   background: var(--ink);
   border-radius: 2px;
-  transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .25s ease;
   transform-origin: center;
+  transition:
+    transform .38s cubic-bezier(.4,0,.2,1),
+    width     .3s  cubic-bezier(.4,0,.2,1),
+    opacity   .25s ease;
 }
-/* Animate bars → X when open */
-.menu-btn.open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.menu-btn.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.menu-btn.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.hb-top { width: 24px; }
+.hb-bot { width: 16px; }        /* shorter bottom line — asymmetric */
 
-/* ====== Mobile sidebar backdrop ====== */
+/* Hover: equalize both lines */
+.menu-btn:hover .hb-top { width: 24px; }
+.menu-btn:hover .hb-bot { width: 24px; }
+
+/* Open → X: both lines become same width and cross */
+.menu-btn.is-open .hb-top {
+  width: 22px;
+  transform: translateY(4.25px) rotate(45deg);
+}
+.menu-btn.is-open .hb-bot {
+  width: 22px;
+  transform: translateY(-4.25px) rotate(-45deg);
+}
+
+/* ====== Backdrop — managed entirely by JS display, CSS only styles ====== */
 .nav-backdrop {
-  display: none;
+  display: none;               /* JS sets display:block on open */
   position: fixed;
   inset: 0;
   z-index: 110;
   background: rgba(0,0,0,0);
   backdrop-filter: blur(0px);
-  transition: background .35s ease, backdrop-filter .35s ease;
+  transition: background .35s ease, backdrop-filter .3s ease;
 }
-.nav-backdrop.open {
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(2px);
+.nav-backdrop.is-open {
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(3px);
 }
 
-/* ====== Mobile sidebar drawer ====== */
+/* ====== Sidebar drawer ====== */
 .nav-sidebar {
-  display: none;
+  display: flex;               /* always in DOM on mobile, hidden via transform */
   position: fixed;
   top: 0; right: 0;
   z-index: 120;
-  width: 300px;
-  max-width: calc(100vw - 56px);
+  width: 280px;
+  max-width: calc(100vw - 52px);
   height: 100%;
   background: #fff;
-  box-shadow: -4px 0 40px rgba(0,0,0,.12), -1px 0 0 var(--line);
-  padding: 80px 28px 40px;
+  border-left: 1px solid var(--line);
+  box-shadow: -8px 0 48px rgba(0,0,0,.10);
+  padding: 88px 0 36px;
   flex-direction: column;
-  gap: 32px;
   transform: translateX(100%);
-  transition: transform .4s cubic-bezier(.4,0,.2,1);
+  transition: transform .42s cubic-bezier(.4,0,.2,1);
   overflow-y: auto;
+  visibility: hidden;          /* prevent focus trap when closed */
 }
-.nav-sidebar.open { transform: translateX(0); }
+.nav-sidebar.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
 
+/* Sidebar nav links */
 .sidebar-links {
   list-style: none;
-  margin: 0; padding: 0;
+  margin: 0; padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  flex: 1;
+}
+.sidebar-links li {
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-links li:first-child {
+  border-top: 1px solid var(--line);
 }
 .sidebar-links a {
-  display: block;
-  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 4px;
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
-  color: var(--ink);
-  border-radius: var(--radius-sm);
-  transition: background .2s ease, color .2s ease;
+  color: var(--ink-soft);
+  transition: color .2s ease, padding-left .2s ease;
+  letter-spacing: -0.01em;
+}
+.sidebar-links a::after {
+  content: "→";
+  font-size: 13px;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity .2s ease, transform .2s ease;
+  color: var(--red);
 }
 .sidebar-links a:hover,
 .sidebar-links a[aria-current="page"] {
-  background: var(--bg-soft);
-  color: var(--red);
+  color: var(--ink);
+  padding-left: 6px;
+}
+.sidebar-links a:hover::after,
+.sidebar-links a[aria-current="page"]::after {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.sidebar-cta {
+/* Sidebar footer CTA */
+.sidebar-footer {
+  padding: 24px 20px 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: auto;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
+}
+.sidebar-cta-btn {
+  width: 100%;
+  justify-content: center;
+}
+.sidebar-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.sidebar-wa:hover {
+  color: var(--ink);
+  border-color: var(--ink-mute);
+  background: var(--bg-soft);
 }
 
-/* Show hamburger + sidebar only on mobile/tablet */
+/* Show hamburger only on mobile/tablet — sidebar always in DOM */
 @media (max-width: 860px) {
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .menu-btn { display: flex; }
-  .nav-backdrop { display: block; }
-  .nav-sidebar { display: flex; }
+}
+
+/* Hide sidebar from DOM entirely on desktop */
+@media (min-width: 861px) {
+  .nav-sidebar { display: none; }
+  .nav-backdrop { display: none !important; }
 }
 
 /* ====== Wide desktop (≥1600px) — more breathing room ====== */
