@@ -4,34 +4,112 @@ import { SITE } from '~/data/site';
 interface Props { active?: 'home'|'about'|'services'|'contact'; homeBase?: string }
 const { active, homeBase = '/' } = Astro.props;
 ---
+
 <header class="site-header" role="banner">
   <div class="nav-inner">
     <a href={homeBase} class="brand" aria-label={`${SITE.name} — Home`}>
-      <span class="dot" aria-hidden="true"></span>MEDIA&nbsp;PRO
+      <img src="/logo-text.png" alt="Media Pro" width="130" height="43" />
     </a>
+
     <nav aria-label="Primary navigation">
-      <ul class="nav-links" id="navLinks">
+      <ul class="nav-links">
         <li><a href={homeBase} aria-current={active === 'home' ? 'page' : undefined}>Home</a></li>
         <li><a href={`${homeBase}#about`} aria-current={active === 'about' ? 'page' : undefined}>About</a></li>
         <li><a href={`${homeBase}#services`} aria-current={active === 'services' ? 'page' : undefined}>Services</a></li>
         <li><a href="/contact" aria-current={active === 'contact' ? 'page' : undefined}>Contact</a></li>
       </ul>
     </nav>
-    <a href="/contact" class="btn btn-primary nav-cta">Get Started <Icon name="arrow-right" size={14} /></a>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks" type="button"><Icon name="menu" size={20} /></button>
+
+    <a href="/contact" class="btn btn-primary nav-cta">
+      Get Started
+      <Icon name="arrow-right" size={14} />
+    </a>
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="navSidebar"
+      type="button"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
   </div>
 </header>
+
+<!-- Mobile sidebar overlay -->
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+<!-- Mobile sidebar -->
+<nav
+  class="nav-sidebar"
+  id="navSidebar"
+  aria-label="Mobile navigation"
+  aria-hidden="true"
+>
+  <ul class="sidebar-links">
+    <li><a href={homeBase} aria-current={active === 'home' ? 'page' : undefined}>Home</a></li>
+    <li><a href={`${homeBase}#about`} aria-current={active === 'about' ? 'page' : undefined}>About</a></li>
+    <li><a href={`${homeBase}#services`} aria-current={active === 'services' ? 'page' : undefined}>Services</a></li>
+    <li><a href="/contact" aria-current={active === 'contact' ? 'page' : undefined}>Contact</a></li>
+  </ul>
+  <div class="sidebar-cta">
+    <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center;">
+      Get Started
+      <Icon name="arrow-right" size={14} />
+    </a>
+    <a href={`${SITE.waLink}?text=${encodeURIComponent("Hi, I'd like a free consultation")}`} target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="width:100%;justify-content:center;">
+      WhatsApp
+    </a>
+  </div>
+</nav>
+
 <script>
   import '~/lib/header-scroll';
-  const btn = document.getElementById('menuBtn');
-  const nav = document.getElementById('navLinks');
-  if (btn && nav) {
-    btn.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(open));
-      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    });
-    nav.addEventListener('click', (e) => { if ((e.target as HTMLElement).tagName === 'A') { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.focus(); } });
+
+  const btn = document.getElementById('menuBtn') as HTMLButtonElement | null;
+  const sidebar = document.getElementById('navSidebar') as HTMLElement | null;
+  const backdrop = document.getElementById('navBackdrop') as HTMLElement | null;
+
+  function openMenu() {
+    if (!btn || !sidebar || !backdrop) return;
+    btn.classList.add('open');
+    sidebar.classList.add('open');
+    backdrop.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Close menu');
+    sidebar.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
   }
+
+  function closeMenu() {
+    if (!btn || !sidebar || !backdrop) return;
+    btn.classList.remove('open');
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open menu');
+    sidebar.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  btn?.addEventListener('click', () => {
+    btn.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  backdrop?.addEventListener('click', closeMenu);
+
+  sidebar?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn?.classList.contains('open')) {
+      closeMenu();
+      btn.focus();
+    }
+  });
 </script>

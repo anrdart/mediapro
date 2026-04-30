@@ -24,8 +24,8 @@ const { title, description, canonical, ogImage, ogType, noindex, active, schemas
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload />
     {preloadHero && <link rel="preload" as="image" href="/images/hero-phone.png" fetchpriority="high" />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/logo-color.png" />
+    <link rel="apple-touch-icon" href="/logo-color.png" />
     <JsonLd data={organizationSchema} />
     <JsonLd data={websiteSchema} />
     {schemas.map((s) => <JsonLd data={s} />)}
