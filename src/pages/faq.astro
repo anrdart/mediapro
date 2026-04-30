@@ -1,0 +1,70 @@
+---
+import SubpageLayout from '~/layouts/SubpageLayout.astro';
+import { getCollection } from 'astro:content';
+import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+import { faqPageSchema } from '~/data/schemas/faq-page';
+
+const faqs = await getCollection('faqs');
+const cats = ['all', 'general', 'services', 'pricing', 'process', 'results'];
+
+const schemas = [
+  breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'FAQ' }]),
+  faqPageSchema(faqs.map((f) => ({
+    question: f.data.question,
+    answer: f.data.answer,
+    expandedAnswer: f.data.expandedAnswer,
+  }))),
+];
+---
+<SubpageLayout
+  title="FAQ — Digital Marketing Services | Media Pro"
+  description="17 answers to common questions about Media Pro's services — pricing, timelines, process, what's included, results, and how we work."
+  schemas={schemas}
+  pageTitle='Frequently Asked <span class="accent">Questions</span>'
+  pageLede="Everything you wanted to know before working with Media Pro. Can't find your answer? Drop us a message — we usually reply within 4 working hours."
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'FAQ' }]}
+>
+  <section class="subpage-body">
+    <div class="container" style="max-width:920px;">
+      <div class="faq-categories" id="faqCats">
+        {cats.map((c, i) => (
+          <button
+            type="button"
+            class:list={['faq-cat', i === 0 && 'is-active']}
+            data-cat={c}
+          >
+            {c.charAt(0).toUpperCase() + c.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      <div class="faq-list" id="faqList">
+        {faqs.map((f) => (
+          <div class="faq-item" data-cat={f.data.category}>
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>{f.data.question}</span>
+              <span class="toggle" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                <p>{f.data.answer}</p>
+                {f.data.expandedAnswer && <p>{f.data.expandedAnswer}</p>}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style="margin-top:48px;text-align:center;padding:32px 24px;background:var(--bg-soft);border-radius:var(--radius);">
+        <h3 style="font-family:var(--font-display);font-size:24px;margin:0 0 12px;">Still have questions?</h3>
+        <p style="margin:0 0 20px;color:var(--ink-soft);">We respond within 4 working hours.</p>
+        <a href="/contact" class="btn btn-primary">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import '~/lib/faq-filter';
+    import '~/lib/faq-accordion';
+  </script>
+</SubpageLayout>

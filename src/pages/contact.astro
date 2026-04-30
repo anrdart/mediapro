@@ -1,0 +1,134 @@
+---
+import SubpageLayout from '~/layouts/SubpageLayout.astro';
+import Icon from '~/components/icons/Icon.astro';
+import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+import {
+  CONTACT_CARDS,
+  CONTACT_HERO,
+  SERVICE_OPTIONS,
+  BUDGET_OPTIONS,
+  TIMELINE_OPTIONS,
+} from '~/_extracted/contact-content';
+
+const schemas = [
+  breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Contact' }]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Media Pro',
+    url: 'https://mediapro.work/contact',
+    mainEntity: { '@id': 'https://mediapro.work/#organization' },
+  },
+];
+
+// Map icon names to valid icon components (location doesn't exist, use people)
+const safeIcon = (name: string) => ['email','whatsapp','people','stars','search','heart','data'].includes(name) ? name : 'people';
+---
+<SubpageLayout
+  title="Contact Media Pro — Free Digital Marketing Consultation"
+  description="Get in touch with Media Pro for a free consultation. We respond within 4 working hours. WhatsApp, email, or send a project brief."
+  active="contact"
+  schemas={schemas}
+  pageTitle={CONTACT_HERO.title}
+  pageLede={CONTACT_HERO.lede}
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]}
+>
+  <section class="subpage-body">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          {CONTACT_CARDS.map((c) => (
+            <div class="contact-card">
+              <span class="icon-wrap"><Icon name={safeIcon(c.icon)} size={20} /></span>
+              <div>
+                <h4>{c.label}</h4>
+                {c.href ? (
+                  <a
+                    href={c.href}
+                    target={c.external ? '_blank' : undefined}
+                    rel={c.external ? 'noopener noreferrer' : undefined}
+                  >{c.value}</a>
+                ) : (
+                  <p>{c.value}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <h3>Tell us about your project</h3>
+          <p>We respond within 4 working hours. Submitting will pre-fill a WhatsApp message you can review and send.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Name<span class="req">*</span></label>
+              <input id="name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="email">Email<span class="req">*</span></label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" autocomplete="organization" />
+          </div>
+
+          <div class="field">
+            <label>What services do you need?</label>
+            <div class="service-pills">
+              {SERVICE_OPTIONS.map((s) => (
+                <button type="button" class="pill" data-id={s.id}>{s.label}</button>
+              ))}
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Budget (USD)</label>
+            <div class="budget-pills">
+              {BUDGET_OPTIONS.map((b) => (
+                <button type="button" class="pill" data-id={b.id}>{b.label}</button>
+              ))}
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="timeline">Timeline</label>
+            <select id="timeline" name="timeline">
+              {TIMELINE_OPTIONS.map((t) => (
+                <option value={t.value}>{t.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Tell us more<span class="req">*</span></label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <div class="consent">
+            <input id="consent" name="consent" type="checkbox" required />
+            <label for="consent">
+              I agree to the <a href="/terms">privacy policy</a> and consent to being contacted about my inquiry.
+            </label>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn-primary">
+              Send via WhatsApp
+              <Icon name="arrow-right" size={14} />
+            </button>
+          </div>
+
+          <div class="success-msg">Thanks — we'll be in touch shortly.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import '~/lib/contact-form';
+  </script>
+</SubpageLayout>

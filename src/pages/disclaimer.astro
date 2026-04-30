@@ -1,0 +1,46 @@
+---
+import SubpageLayout from '~/layouts/SubpageLayout.astro';
+import { DISCLAIMER_SECTIONS, DISCLAIMER_HERO } from '~/_extracted/disclaimer-sections';
+import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+
+const schemas = [breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Disclaimer' }])];
+---
+<SubpageLayout
+  title="Disclaimer — Media Pro Digital Marketing"
+  description="Important information about service guarantees, third-party platform limitations, and the nature of digital marketing outcomes."
+  schemas={schemas}
+  pageTitle={DISCLAIMER_HERO.title}
+  pageLede={DISCLAIMER_HERO.lede}
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Disclaimer' }]}
+>
+  <section class="subpage-body">
+    <div class="container">
+      <div class="subpage-grid">
+        <aside class="toc">
+          <h5>Contents</h5>
+          <ol>
+            {DISCLAIMER_SECTIONS.map((s) => (
+              <li><a href={`#${s.id}`}>{s.title}</a></li>
+            ))}
+          </ol>
+        </aside>
+
+        <div class="prose">
+          <p style="margin-bottom:32px;color:var(--ink-mute);font-size:13px;">
+            Last updated: <time datetime={DISCLAIMER_HERO.lastUpdated}>{DISCLAIMER_HERO.lastUpdated}</time>
+          </p>
+          {DISCLAIMER_SECTIONS.map((s) => (
+            <section id={s.id}>
+              <h2><span class="num">{s.num}</span>{s.title}</h2>
+              <Fragment set:html={s.contentHtml} />
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import '~/lib/toc-highlight';
+  </script>
+</SubpageLayout>

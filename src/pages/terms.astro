@@ -1,0 +1,46 @@
+---
+import SubpageLayout from '~/layouts/SubpageLayout.astro';
+import { TERMS_SECTIONS, TERMS_HERO } from '~/_extracted/terms-sections';
+import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+
+const schemas = [breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Terms' }])];
+---
+<SubpageLayout
+  title="Terms of Service & Privacy Policy — Media Pro"
+  description="Combined Terms of Service and Privacy Policy for Media Pro Creative Limited. Acceptance, services, data, payments, IP, liability, and your rights."
+  schemas={schemas}
+  pageTitle={TERMS_HERO.title}
+  pageLede={TERMS_HERO.lede}
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Terms' }]}
+>
+  <section class="subpage-body">
+    <div class="container">
+      <div class="subpage-grid">
+        <aside class="toc">
+          <h5>Contents</h5>
+          <ol>
+            {TERMS_SECTIONS.map((s) => (
+              <li><a href={`#${s.id}`}>{s.title}</a></li>
+            ))}
+          </ol>
+        </aside>
+
+        <div class="prose">
+          <p style="margin-bottom:32px;color:var(--ink-mute);font-size:13px;">
+            Last updated: <time datetime={TERMS_HERO.lastUpdated}>{TERMS_HERO.lastUpdated}</time>
+          </p>
+          {TERMS_SECTIONS.map((s) => (
+            <section id={s.id}>
+              <h2><span class="num">{s.num}</span>{s.title}</h2>
+              <Fragment set:html={s.contentHtml} />
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import '~/lib/toc-highlight';
+  </script>
+</SubpageLayout>
