@@ -4,13 +4,13 @@ import { SITE } from '~/data/site';
 export const GET: APIRoute = async () => {
   const content = `# Media Pro Creative Limited
 
-> Premium global digital marketing agency since ${SITE.founded}. We help brands worldwide grow with Web Development, Google Ads, Meta Ads, SEO, Content Marketing, and Consulting Services. Trusted by ${SITE.stats.brandsServed} brands across ${SITE.stats.countries} countries with a ${SITE.stats.rating} client rating from ${SITE.stats.reviewCount.toLocaleString()}+ reviews.
+> Premium global digital marketing agency since ${SITE.founded}. We help brands worldwide grow with Web Development, Google Ads, Meta Ads, SEO, Content Marketing, and Consulting Services. Trusted by ${SITE.stats.brandsServed} brands across ${SITE.stats.countries} countries with a ${SITE.stats.rating} client rating from ${SITE.stats.reviewCount.toLocaleString("en-US")}+ reviews.
 
 ## Key Information
 
 - **Founded**: ${SITE.founded}
 - **Reach**: ${SITE.stats.countries} countries, ${SITE.stats.brandsServed} brands served
-- **Rating**: ${SITE.stats.rating} / 5 (${SITE.stats.reviewCount.toLocaleString()}+ reviews)
+- **Rating**: ${SITE.stats.rating} / 5 (${SITE.stats.reviewCount.toLocaleString("en-US")}+ reviews)
 - **Projects delivered**: ${SITE.stats.projectsDelivered}
 - **Client satisfaction**: ${SITE.stats.clientSatisfaction}
 - **Contact**: ${SITE.email} · WhatsApp +${SITE.waNumber}
@@ -19,10 +19,10 @@ export const GET: APIRoute = async () => {
 
 ## Services Offered
 
-1. **Search Engine Optimization (SEO)** — Retainer from USD ${SITE.pricing.seoRetainer.toLocaleString()}/month.
-2. **Google Ads** — Management from USD ${SITE.pricing.adsManagement}/month + minimum ad spend USD ${SITE.pricing.adsMinSpend.toLocaleString()}/month.
+1. **Search Engine Optimization (SEO)** — Retainer from USD ${SITE.pricing.seoRetainer.toLocaleString("en-US")}/month.
+2. **Google Ads** — Management from USD ${SITE.pricing.adsManagement}/month + minimum ad spend USD ${SITE.pricing.adsMinSpend.toLocaleString("en-US")}/month.
 3. **Meta Ads** — Facebook & Instagram advertising. Same pricing as Google Ads.
-4. **Web Development** — Landing pages USD ${SITE.pricing.landingPage.toLocaleString()}. Marketing sites USD ${SITE.pricing.marketingSite.toLocaleString()}. Custom builds USD ${SITE.pricing.customBuild.toLocaleString()}+.
+4. **Web Development** — Landing pages USD ${SITE.pricing.landingPage.toLocaleString("en-US")}. Marketing sites USD ${SITE.pricing.marketingSite.toLocaleString("en-US")}. Custom builds USD ${SITE.pricing.customBuild.toLocaleString("en-US")}+.
 5. **Social Media Marketing** — Build community, increase engagement, drive traffic.
 6. **Content Marketing** — Educate audiences, build authority, nurture leads.
 7. **Email Marketing** — Increase retention, encourage repeat purchases, convert prospects.
