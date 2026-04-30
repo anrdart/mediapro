@@ -99,7 +99,7 @@ export const TERMS_SECTIONS: TermsSection[] = [
                 <li><strong>Receive a copy</strong> of your data in a portable format</li>
                 <li><strong>Withdraw consent</strong> for marketing communications at any time</li>
               </ul>
-              <p>To exercise any of these rights, email us at <a href="mailto:mediapro@mediapro.work">mediapro@mediapro.work</a>. We will respond within 30 days.</p>`,
+              <p>To exercise any of these rights, email us at <a href="mailto:admin@mediapro.work">admin@mediapro.work</a>. We will respond within 30 days.</p>`,
   },
   {
     id: 'payments',
@@ -142,7 +142,7 @@ export const TERMS_SECTIONS: TermsSection[] = [
     title: 'Contact Us',
     contentHtml: `<p>Questions about these Terms or our Privacy Policy? Reach out:</p>
               <ul>
-                <li><strong>Email:</strong> <a href="mailto:mediapro@mediapro.work">mediapro@mediapro.work</a></li>
+                <li><strong>Email:</strong> <a href="mailto:admin@mediapro.work">admin@mediapro.work</a></li>
                 <li><strong>WhatsApp:</strong> <a href="https://wa.me/6285129992227" rel="noopener noreferrer">Send a message</a></li>
                 <li><strong>Mail:</strong> Media Pro Creative Limited (remote-first, global)</li>
               </ul>`,

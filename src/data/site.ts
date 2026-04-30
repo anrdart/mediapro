@@ -5,7 +5,7 @@ export const SITE = {
   tagline: 'Crafting brands that stand out in a noisy digital world.',
   description: 'Premium global digital marketing agency. Web Development, Google Ads, Meta Ads, SEO and Consulting Services for brands worldwide.',
   founded: '2014',
-  email: 'mediapro@mediapro.work',
+  email: 'admin@mediapro.work',
   phone: '+62-851-2999-2227',
   waNumber: '6285129992227',
   waLink: 'https://wa.me/6285129992227',

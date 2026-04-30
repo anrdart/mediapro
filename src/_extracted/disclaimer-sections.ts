@@ -70,13 +70,13 @@ export const DISCLAIMER_SECTIONS: DisclaimerSection[] = [
     id: 'errors',
     num: '08',
     title: 'Errors &amp; Omissions',
-    contentHtml: `<p>While we strive to keep the information on this website accurate and up to date, we make no warranty that this site is error-free. If you spot something incorrect, please email <a href="mailto:mediapro@mediapro.work">mediapro@mediapro.work</a> and we'll review it promptly.</p>`,
+    contentHtml: `<p>While we strive to keep the information on this website accurate and up to date, we make no warranty that this site is error-free. If you spot something incorrect, please email <a href="mailto:admin@mediapro.work">admin@mediapro.work</a> and we'll review it promptly.</p>`,
   },
   {
     id: 'changes',
     num: '09',
     title: 'Changes to Disclaimer',
     contentHtml: `<p>We reserve the right to update this Disclaimer at any time. Changes take effect immediately upon publication on this page. The "Last updated" date at the top reflects the most recent revision.</p>
-              <p>Questions? Email us at <a href="mailto:mediapro@mediapro.work">mediapro@mediapro.work</a>.</p>`,
+              <p>Questions? Email us at <a href="mailto:admin@mediapro.work">admin@mediapro.work</a>.</p>`,
   },
 ];

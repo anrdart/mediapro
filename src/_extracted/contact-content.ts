@@ -30,7 +30,7 @@ export const TIMELINE_OPTIONS: TimelineOption[] = [
 ];
 
 export const CONTACT_CARDS: ContactCard[] = [
-  { icon: 'email', label: 'Email', value: 'mediapro@mediapro.work', href: 'mailto:mediapro@mediapro.work' },
+  { icon: 'email', label: 'Email', value: 'admin@mediapro.work', href: 'mailto:admin@mediapro.work' },
   { icon: 'whatsapp', label: 'WhatsApp', value: 'Send a message', href: 'https://wa.me/6285129992227', external: true },
   { icon: 'location', label: 'Studio', value: 'Remote-first, global' },
 ];
