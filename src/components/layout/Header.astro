@@ -45,6 +45,10 @@ const { active, homeBase = '/' } = Astro.props;
 
 <!-- Sidebar drawer -->
 <aside class="nav-sidebar" id="navSidebar" aria-label="Mobile navigation" aria-hidden="true">
+  <button class="sidebar-close" id="sidebarClose" aria-label="Close menu" type="button">
+    <span class="sc-line"></span>
+    <span class="sc-line"></span>
+  </button>
   <nav>
     <ul class="sidebar-links">
       <li><a href={homeBase} aria-current={active === 'home' ? 'page' : undefined}>Home</a></li>
@@ -65,9 +69,10 @@ const { active, homeBase = '/' } = Astro.props;
 <script>
   import '~/lib/header-scroll';
 
-  const btn    = document.getElementById('menuBtn')    as HTMLButtonElement | null;
-  const sidebar = document.getElementById('navSidebar') as HTMLElement | null;
+  const btn      = document.getElementById('menuBtn')     as HTMLButtonElement | null;
+  const sidebar  = document.getElementById('navSidebar')  as HTMLElement | null;
   const backdrop = document.getElementById('navBackdrop') as HTMLElement | null;
+  const closeBtn = document.getElementById('sidebarClose') as HTMLButtonElement | null;
 
   function open() {
     if (!btn || !sidebar || !backdrop) return;
@@ -98,6 +103,7 @@ const { active, homeBase = '/' } = Astro.props;
   }
 
   btn?.addEventListener('click', () => btn.classList.contains('is-open') ? close() : open());
+  closeBtn?.addEventListener('click', close);
   backdrop?.addEventListener('click', close);
   sidebar?.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
   document.addEventListener('keydown', e => {
