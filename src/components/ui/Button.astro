@@ -1,0 +1,6 @@
+---
+interface Props { href?: string; variant?: 'primary'|'red'|'ghost'|'link'; external?: boolean; class?: string; ariaLabel?: string; type?: 'button'|'submit' }
+const { href, variant = 'primary', external, class: className = '', ariaLabel, type } = Astro.props;
+const cls = ['btn', `btn-${variant}`, className].filter(Boolean).join(' ');
+---
+{href ? <a href={href} class={cls} rel={external ? 'noopener noreferrer' : undefined} target={external ? '_blank' : undefined} aria-label={ariaLabel}><slot /></a> : <button type={type ?? 'button'} class={cls} aria-label={ariaLabel}><slot /></button>}

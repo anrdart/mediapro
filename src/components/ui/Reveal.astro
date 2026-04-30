@@ -1,0 +1,6 @@
+---
+interface Props { delay?: 0|1|2|3|4|5; as?: string; class?: string; id?: string }
+const { delay = 0, as: Tag = 'div', class: className = '', id } = Astro.props;
+const cls = ['reveal', delay ? `reveal-delay-${delay}` : '', className].filter(Boolean).join(' ');
+---
+<Tag class={cls} id={id}><slot /></Tag>

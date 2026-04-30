@@ -1,0 +1,7 @@
+---
+interface Props { term: string; definition: string }
+const { term, definition } = Astro.props;
+---
+<div class="definition-block" itemscope itemtype="https://schema.org/DefinedTerm">
+  <p class="lede"><strong itemprop="name">{term}</strong><span itemprop="description"> {definition}</span></p>
+</div>

@@ -1,0 +1,8 @@
+---
+interface Props { name: string; size?: number; class?: string }
+const { name, size = 22, class: className = '' } = Astro.props;
+const iconMap = import.meta.glob<{ default: any }>('./Icon-*.astro', { eager: true });
+const key = `./Icon-${name}.astro`;
+const Comp = iconMap[key]?.default;
+---
+{Comp ? <Comp size={size} class={className} /> : null}

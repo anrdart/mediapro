@@ -1,0 +1,12 @@
+---
+import { SITE } from '~/data/site';
+import JsonLd from './JsonLd.astro';
+interface Crumb { label: string; href?: string }
+interface Props { items: Crumb[] }
+const { items } = Astro.props;
+const schema = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.label, item: c.href ? new URL(c.href, SITE.url).toString() : undefined })) };
+---
+<nav class="crumbs" aria-label="Breadcrumb">
+  {items.map((c, i) => <>{c.href ? <a href={c.href}>{c.label}</a> : <span class="current">{c.label}</span>}{i < items.length - 1 && <span class="sep">/</span>}</>)}
+</nav>
+<JsonLd data={schema} />

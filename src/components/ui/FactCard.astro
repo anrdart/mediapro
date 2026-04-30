@@ -1,0 +1,9 @@
+---
+interface Props { metric: string; label: string; source?: string; sourceUrl?: string }
+const { metric, label, source, sourceUrl } = Astro.props;
+---
+<div class="fact-card" itemscope itemtype="https://schema.org/Statistic">
+  <span class="metric" itemprop="value">{metric}</span>
+  <span class="label" itemprop="description">{label}</span>
+  {source && <small class="source">{sourceUrl ? <a href={sourceUrl} rel="cite">{source}</a> : <cite>{source}</cite>}</small>}
+</div>

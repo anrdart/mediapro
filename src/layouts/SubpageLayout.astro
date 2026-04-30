@@ -1,0 +1,21 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '~/components/seo/Breadcrumbs.astro';
+interface Props {
+  title: string; description: string; canonical?: string; ogImage?: string;
+  active?: 'home'|'about'|'services'|'contact'; schemas?: unknown[];
+  pageTitle: string; pageEyebrow?: string; pageLede?: string;
+  crumbs: { label: string; href?: string }[]; noindex?: boolean;
+}
+const { pageTitle, pageEyebrow, pageLede, crumbs, ...rest } = Astro.props;
+---
+<BaseLayout {...rest}>
+  <section class="subpage-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1 set:html={pageTitle} />
+      {pageLede && <p class="lede">{pageLede}</p>}
+    </div>
+  </section>
+  <slot />
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import Icon from '~/components/icons/Icon.astro';
+import { SITE } from '~/data/site';
+interface Props { active?: 'home'|'about'|'services'|'contact'; homeBase?: string }
+const { active, homeBase = '/' } = Astro.props;
+---
+<header class="site-header" role="banner">
+  <div class="nav-inner">
+    <a href={homeBase} class="brand" aria-label={`${SITE.name} — Home`}>
+      <span class="dot" aria-hidden="true"></span>MEDIA&nbsp;PRO
+    </a>
+    <nav aria-label="Primary navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href={homeBase} aria-current={active === 'home' ? 'page' : undefined}>Home</a></li>
+        <li><a href={`${homeBase}#about`} aria-current={active === 'about' ? 'page' : undefined}>About</a></li>
+        <li><a href={`${homeBase}#services`} aria-current={active === 'services' ? 'page' : undefined}>Services</a></li>
+        <li><a href="/contact" aria-current={active === 'contact' ? 'page' : undefined}>Contact</a></li>
+      </ul>
+    </nav>
+    <a href="/contact" class="btn btn-primary nav-cta">Get Started <Icon name="arrow-right" size={14} /></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks" type="button"><Icon name="menu" size={20} /></button>
+  </div>
+</header>
+<script>
+  import '~/lib/header-scroll';
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('navLinks');
+  if (btn && nav) {
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    nav.addEventListener('click', (e) => { if ((e.target as HTMLElement).tagName === 'A') { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.focus(); } });
+  }
+</script>
