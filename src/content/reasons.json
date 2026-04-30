@@ -1,0 +1,6 @@
+[
+  { "id": "track-record", "icon": "like", "title": "Proven Track Record of Delivering Results", "desc": "A documented history of meeting and exceeding ambitious client goals." },
+  { "id": "customized", "icon": "share", "title": "Customized Strategies, Tailored to You", "desc": "Solutions designed around each client's unique audience, budget, and goals." },
+  { "id": "flexible", "icon": "briefcase", "title": "Flexible Solutions for Any Business Size", "desc": "Built with scalability in mind — whether you're scrappy or scaling fast." },
+  { "id": "roi", "icon": "chart", "title": "Cost-Effective with a Focus on ROI", "desc": "Every dollar you invest is engineered to generate maximum measurable value." }
+]

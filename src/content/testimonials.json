@@ -1,0 +1,5 @@
+[
+  { "id": "setiyo", "quote": "After working with this team for six months, focusing on SEO and content marketing, our organic traffic skyrocketed 180%. They've helped us compete with the big players — a well-deserved investment.", "img": "/images/testimonial-setiyo.webp", "name": "Setiyo Pramono", "role": "Marketing Director", "metric": "180% organic traffic increase" },
+  { "id": "iyus", "quote": "They didn't just hand us templates — they truly listened and designed highly efficient Paid Ads and Social campaigns. Our conversion rate jumped 45%.", "img": "/images/testimonial-iyus.png", "name": "Iyus", "role": "E-commerce Founder", "metric": "45% conversion rate lift" },
+  { "id": "suci", "quote": "Their expertise across the board — from SEO to SMM — is exceptional. The service is comprehensive and results consistently exceed expectations. Highly recommended.", "img": "/images/testimonial-suci.jpg", "name": "Suci Rahmawati", "role": "CMO", "metric": "Comprehensive cross-channel results" }
+]
