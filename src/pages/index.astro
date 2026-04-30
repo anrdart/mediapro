@@ -1,0 +1,66 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Hero from '~/components/sections/Hero.astro';
+import Marquee from '~/components/sections/Marquee.astro';
+import About from '~/components/sections/About.astro';
+import ServicesIntro from '~/components/sections/ServicesIntro.astro';
+import Services from '~/components/sections/Services.astro';
+import Cta from '~/components/sections/Cta.astro';
+import Stats from '~/components/sections/Stats.astro';
+import Why from '~/components/sections/Why.astro';
+import Testimonials from '~/components/sections/Testimonials.astro';
+import FooterCta from '~/components/sections/FooterCta.astro';
+import { professionalServiceSchema } from '~/data/schemas/professional-service';
+import { serviceCatalogSchema } from '~/data/schemas/service-catalog';
+import { faqPageSchema } from '~/data/schemas/faq-page';
+import { productReviewSchema } from '~/data/schemas/product-review';
+import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+import { getCollection } from 'astro:content';
+
+const testimonials = await getCollection('testimonials');
+
+const homepageFaqs = [
+  {
+    question: 'What digital marketing services does Media Pro offer?',
+    answer: 'Media Pro offers Web Development, Google Ads Services, Meta Ads Services, SEO, Social Media Marketing, Content Marketing, Email Marketing, Influencer Marketing, Analytics & Reporting, and Consulting Services.',
+  },
+  {
+    question: 'How experienced is Media Pro?',
+    answer: 'Media Pro has more than 10 years of digital marketing expertise, having delivered 91,000+ projects to 84,000+ happy clients with a 4.7 client rating.',
+  },
+  {
+    question: 'How can I contact Media Pro for a consultation?',
+    answer: 'You can email mediapro@mediapro.work or message us on WhatsApp for a free consultation. We work with clients globally and reply within 4 working hours.',
+  },
+  {
+    question: 'Does Media Pro work with small businesses?',
+    answer: 'Yes. Our solutions are flexible and scalable for businesses of all sizes — from emerging brands to enterprise clients.',
+  },
+];
+
+const schemas = [
+  professionalServiceSchema,
+  serviceCatalogSchema,
+  faqPageSchema(homepageFaqs),
+  productReviewSchema(testimonials.map((t) => ({ quote: t.data.quote, name: t.data.name, role: t.data.role }))),
+  breadcrumbSchema([{ label: 'Home', href: '/' }]),
+];
+---
+<BaseLayout
+  title="Media Pro — Global Digital Marketing Agency | SEO, Ads & Web Dev"
+  description="Premium global digital marketing agency. Web Development, Google Ads, Meta Ads, SEO & Consulting. Trusted by 25,000+ brands across 40+ countries. 10+ years experience, 4.7 rating."
+  active="home"
+  schemas={schemas}
+  preloadHero={true}
+>
+  <Hero />
+  <Marquee />
+  <About />
+  <ServicesIntro />
+  <Services />
+  <Cta />
+  <Stats />
+  <Why />
+  <Testimonials />
+  <FooterCta />
+</BaseLayout>
