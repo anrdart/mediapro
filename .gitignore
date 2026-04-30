@@ -13,3 +13,6 @@ pnpm-debug.log*
 .idea
 .DS_Store
 .bun/
+.claude/
+docs/
+mediapro-v2-astro-bun-superprompt.md
