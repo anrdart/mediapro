@@ -1,0 +1,48 @@
+---
+import Reveal from '~/components/ui/Reveal.astro';
+import Icon from '~/components/icons/Icon.astro';
+---
+<section>
+  <div class="container">
+    <div class="services-intro-grid">
+      <Reveal class="visual">
+        <img
+          src="/images/services-visual.png"
+          alt="Strategy in action — Media Pro digital marketing"
+          loading="lazy"
+          width="600"
+          height="600"
+        />
+      </Reveal>
+
+      <div>
+        <Reveal><span class="eyebrow">Our Services</span></Reveal>
+        <Reveal delay={1}>
+          <h2 class="h-section" style="margin-top:22px;">Innovative strategies, measurable success.</h2>
+        </Reveal>
+        <Reveal delay={2}>
+          <p class="lede" style="margin-top:22px;">
+            Media Pro's marketing strategies don't follow the playbook — they rewrite it. So your competitors can't predict your next move.
+          </p>
+        </Reveal>
+
+        <Reveal delay={3}>
+          <div class="highlight-box">
+            <span class="icon-wrap"><Icon name="people" /></span>
+            <div>
+              <h4>98% client satisfaction with proven results</h4>
+              <p>We work from experience to consistently deliver outcomes that move the needle.</p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={4}>
+          <a href="https://wa.me/6285129992227" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Free Consultation
+            <Icon name="arrow-right" size={14} />
+          </a>
+        </Reveal>
+      </div>
+    </div>
+  </div>
+</section>

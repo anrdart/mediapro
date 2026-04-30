@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+const logos = await getCollection('trustedLogos');
+const tripled = [...logos, ...logos, ...logos];
+---
+<section class="trusted" aria-label="Trusted brands and organizations">
+  <div class="container">
+    <p class="trusted-label">Trusted by 25,000+ brands across 40+ countries</p>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {tripled.map((logo) => (
+        <img
+          src={logo.data.src}
+          alt={`${logo.data.alt} — Media Pro client logo`}
+          loading="lazy"
+          height="52"
+        />
+      ))}
+    </div>
+  </div>
+</section>

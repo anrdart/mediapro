@@ -1,0 +1,35 @@
+---
+import Reveal from '~/components/ui/Reveal.astro';
+import Icon from '~/components/icons/Icon.astro';
+import { getCollection } from 'astro:content';
+const reasons = await getCollection('reasons');
+---
+<section>
+  <div class="container">
+    <Reveal>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Why Choose Us</span>
+          <h2 class="h-section" style="margin-top:18px;">
+            The power to transform <span style="color:var(--gold);font-style:italic;font-weight:500;">your digital strategy</span>.
+          </h2>
+        </div>
+        <p class="right">Four reasons brands stay with Media Pro for years — not months.</p>
+      </div>
+    </Reveal>
+
+    <div class="reasons-grid">
+      {reasons.map((r, i) => (
+        <Reveal delay={((i % 2) + 1) as 1 | 2}>
+          <div class="reason-card">
+            <span class="icon-wrap"><Icon name={r.data.icon} size={26} /></span>
+            <div>
+              <h4>{r.data.title}</h4>
+              <p>{r.data.desc}</p>
+            </div>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>

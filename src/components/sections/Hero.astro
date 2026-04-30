@@ -1,0 +1,84 @@
+---
+import Reveal from '~/components/ui/Reveal.astro';
+import Icon from '~/components/icons/Icon.astro';
+import { SITE } from '~/data/site';
+---
+<section class="hero" id="top" aria-labelledby="hero-heading">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <Reveal><span class="eyebrow">We are Media Pro Creative</span></Reveal>
+        <Reveal delay={1}>
+          <h1 id="hero-heading" class="h-display">
+            Crafting brands that <span class="accent">stand out</span> in a noisy digital world.
+          </h1>
+        </Reveal>
+        <Reveal delay={2}>
+          <p class="lede">
+            <strong>Media Pro is a global digital marketing agency founded in {SITE.founded}.</strong>
+            {' '}We help brands worldwide grow through Web Development, Google Ads, Meta Ads, SEO, and Consulting —
+            trusted by {SITE.stats.brandsServed} brands across {SITE.stats.countries} countries with a {SITE.stats.rating} client rating.
+          </p>
+        </Reveal>
+        <Reveal delay={3} class="hero-actions">
+          <a href="#about" class="btn btn-primary">
+            Discover more
+            <Icon name="arrow-right" size={14} />
+          </a>
+          <a
+            href={`${SITE.waLink}?text=${encodeURIComponent("Hi, I'd like to schedule a free consultation")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-ghost"
+          >
+            Free Consultation
+          </a>
+        </Reveal>
+
+        <Reveal delay={4} class="hero-meta">
+          <div class="m">
+            <strong>{SITE.stats.yearsExperience} yrs</strong>
+            <span>Industry experience</span>
+          </div>
+          <div class="m">
+            <strong>{SITE.stats.brandsServed}</strong>
+            <span>Global brands trust us</span>
+          </div>
+          <div class="m">
+            <strong>{SITE.stats.rating}★</strong>
+            <span>Client rating</span>
+          </div>
+        </Reveal>
+      </div>
+
+      <Reveal delay={2} class="phone-stage">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+
+        <div class="chip chip-1">
+          <Icon name="arrow-up" size={14} />
+          <span>Engagement <span class="red">+180%</span></span>
+        </div>
+        <div class="chip chip-2">
+          <Icon name="stars" size={14} />
+          <span>Conversion <span class="gold">+45%</span></span>
+        </div>
+        <div class="chip chip-3">
+          <Icon name="people" size={14} />
+          <span>Reach <span class="red">2.4M</span></span>
+        </div>
+
+        <img
+          class="phone"
+          src="/images/hero-phone.png"
+          alt="Media Pro digital marketing dashboard preview on mobile"
+          width="320"
+          height="640"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </Reveal>
+    </div>
+  </div>
+</section>

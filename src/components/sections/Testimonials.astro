@@ -1,0 +1,58 @@
+---
+import Reveal from '~/components/ui/Reveal.astro';
+import Icon from '~/components/icons/Icon.astro';
+import { getCollection } from 'astro:content';
+const testimonials = await getCollection('testimonials');
+---
+<section>
+  <div class="container">
+    <Reveal>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Client Feedback &amp; Reviews</span>
+          <h2 class="h-section" style="margin-top:18px;">Marketing solutions tailored for your success.</h2>
+        </div>
+      </div>
+    </Reveal>
+
+    <div class="growth-stats">
+      <Reveal delay={1}>
+        <div class="growth-card">
+          <span class="icon-wrap"><Icon name="arrow-up" size={26} /></span>
+          <div>
+            <span class="num">68%</span>
+            <h5>Business Growth</h5>
+            <p>Many of our clients grow much faster than they planned.</p>
+          </div>
+        </div>
+      </Reveal>
+      <Reveal delay={2}>
+        <div class="growth-card">
+          <span class="icon-wrap"><Icon name="arrow-up" size={26} /></span>
+          <div>
+            <span class="num">42%</span>
+            <h5>Conversion Lift</h5>
+            <p>Even small brands see substantial conversion gains.</p>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+
+    <div class="testimonials-track">
+      {testimonials.map((t, i) => (
+        <Reveal delay={((i % 3) + 1) as 1 | 2 | 3}>
+          <div class="testimonial">
+            <p>{t.data.quote}</p>
+            <div class="testimonial-author">
+              <img src={t.data.img} alt={t.data.name} width="44" height="44" loading="lazy" />
+              <div>
+                <strong>{t.data.name}</strong>
+                <span>{t.data.role}</span>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>

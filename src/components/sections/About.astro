@@ -1,0 +1,69 @@
+---
+import Reveal from '~/components/ui/Reveal.astro';
+import Icon from '~/components/icons/Icon.astro';
+---
+<section id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-copy">
+        <Reveal><span class="eyebrow">About Media Pro</span></Reveal>
+        <Reveal delay={1}>
+          <h2 id="about-heading" class="h-section">
+            More than a decade of <span style="color:var(--gold-dark);font-style:italic;font-weight:500;">digital marketing</span> expertise.
+          </h2>
+        </Reveal>
+        <Reveal delay={2}>
+          <p class="lede" style="margin-top:24px;">
+            Media Pro offers a full suite of digital marketing services — SEO, PPC, social media, and content creation — aimed at driving brand visibility and generating significant conversions.
+          </p>
+        </Reveal>
+
+        <Reveal delay={3} class="about-bullets">
+          <div class="bullet">
+            <span class="icon-wrap"><Icon name="thumbs-up" /></span>
+            <span>Social Media Strategy</span>
+          </div>
+          <div class="bullet">
+            <span class="icon-wrap"><Icon name="cloud" /></span>
+            <span>Digital Marketing</span>
+          </div>
+        </Reveal>
+
+        <Reveal delay={4}>
+          <a href="https://wa.me/6285129992227" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Contact us
+            <Icon name="arrow-right" size={14} />
+          </a>
+        </Reveal>
+      </div>
+
+      <Reveal delay={2} class="about-visual">
+        <img
+          src="/images/about-mockup.png"
+          alt="Media Pro mobile app showcasing digital marketing analytics"
+          width="414"
+          height="600"
+          loading="lazy"
+        />
+      </Reveal>
+    </div>
+
+    <div class="vmm">
+      <Reveal>
+        <span class="icon-wrap"><Icon name="rocket" /></span>
+        <h4>Our Vision</h4>
+        <p>Create a healthy digital marketing ecosystem that lifts every brand we touch.</p>
+      </Reveal>
+      <Reveal delay={1}>
+        <span class="icon-wrap"><Icon name="compass" /></span>
+        <h4>Our Mission</h4>
+        <p>Stay on the right path of digital marketing — strategic, ethical, and built to last.</p>
+      </Reveal>
+      <Reveal delay={2}>
+        <span class="icon-wrap"><Icon name="handshake" /></span>
+        <h4>Our Motto</h4>
+        <p>Make your business 10× more visible and valuable than your competitors.</p>
+      </Reveal>
+    </div>
+  </div>
+</section>

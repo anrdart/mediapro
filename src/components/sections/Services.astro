@@ -1,0 +1,37 @@
+---
+import Reveal from '~/components/ui/Reveal.astro';
+import Icon from '~/components/icons/Icon.astro';
+import { getCollection } from 'astro:content';
+const services = await getCollection('services');
+---
+<section id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <Reveal>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">What we offer</span>
+          <h2 id="services-heading" class="h-section" style="margin-top:18px;">
+            Strategic thinkers, creative doers, your marketing leaders.
+          </h2>
+        </div>
+        <p class="right">
+          Six disciplines, one team. Media Pro picks the right mix for each brand — no templates, no guesswork.
+        </p>
+      </div>
+    </Reveal>
+
+    <Reveal>
+      <div class="services-grid" role="list">
+        {services.map((s) => (
+          <article class="service-card" role="listitem" itemscope itemtype="https://schema.org/Service">
+            <span class="num">{s.data.num} / 06</span>
+            <span class="icon-wrap" aria-hidden="true"><Icon name={s.data.icon} size={26} /></span>
+            <h3 itemprop="name">{s.data.title}</h3>
+            <p itemprop="description">{s.data.desc}</p>
+            <meta itemprop="provider" content="Media Pro Creative Limited" />
+          </article>
+        ))}
+      </div>
+    </Reveal>
+  </div>
+</section>

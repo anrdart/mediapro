@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+const stats = await getCollection('stats');
+---
+<section class="stats" itemscope itemtype="https://schema.org/Dataset">
+  <meta itemprop="name" content="Media Pro Performance Metrics 2026" />
+  <meta itemprop="creator" content="Media Pro Creative Limited" />
+  <div class="container">
+    <div class="stats-grid">
+      {stats.map((s) => {
+        const isPlus = s.data.num.endsWith('+');
+        const base = isPlus ? s.data.num.slice(0, -1) : s.data.num;
+        return (
+          <div class="stat">
+            <span
+              class="num"
+              data-stat-target={s.data.num}
+              aria-label={`${s.data.num} ${s.data.label}`}
+            >
+              {base}{isPlus && <span class="plus">+</span>}
+            </span>
+            <span class="label">{s.data.label}</span>
+          </div>
+        );
+      })}
+    </div>
+    <small class="stats-source" style="display:block;margin-top:24px;text-align:center;color:var(--ink-mute);font-size:12px;">
+      Source: Media Pro internal data, last updated <time datetime="2026-04-30">April 2026</time>
+    </small>
+  </div>
+</section>
+
+<script>
+  import '~/lib/stat-counter';
+</script>
