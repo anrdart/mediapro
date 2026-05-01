@@ -2,7 +2,7 @@
 import Reveal from '~/components/ui/Reveal.astro';
 import Icon from '~/components/icons/Icon.astro';
 import { getCollection } from 'astro:content';
-const services = await getCollection('services');
+const services = (await getCollection('services')).sort((a, b) => a.data.num.localeCompare(b.data.num));
 ---
 <section id="services" aria-labelledby="services-heading">
   <div class="container">
