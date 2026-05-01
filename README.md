@@ -1,4 +1,4 @@
-# Media Pro — Astro 6 + Bun
+# Media Pro
 
 Production-ready marketing site for Media Pro Creative Limited. Built with Astro 6, Tailwind CSS v4, and Bun.
 
