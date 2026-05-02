@@ -20,6 +20,18 @@ export default defineConfig({
         locales: { en: 'en-US' },
       },
       customPages: ['https://mediapro.work/llms.txt'],
+      serialize(item) {
+        const overrides = {
+          'https://mediapro.work/': { priority: 1.0, changefreq: 'daily' },
+          'https://mediapro.work/contact': { priority: 0.9, changefreq: 'weekly' },
+          'https://mediapro.work/faq': { priority: 0.8, changefreq: 'weekly' },
+          'https://mediapro.work/llms.txt': { priority: 0.5, changefreq: 'daily' },
+          'https://mediapro.work/terms': { priority: 0.4, changefreq: 'monthly' },
+          'https://mediapro.work/disclaimer': { priority: 0.3, changefreq: 'monthly' },
+        };
+        const o = overrides[item.url];
+        return o ? { ...item, ...o } : item;
+      },
     }),
   ],
   vite: {

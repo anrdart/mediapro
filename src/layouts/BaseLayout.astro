@@ -21,6 +21,8 @@ const { title, description, canonical, ogImage, ogType, noindex, active, schemas
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <BaseSEO {title} {description} {canonical} {ogImage} {ogType} {noindex} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload />
     {preloadHero && <link rel="preload" as="image" href="/images/hero-phone.png" fetchpriority="high" />}
