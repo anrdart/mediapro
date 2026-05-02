@@ -16,6 +16,7 @@ import { faqPageSchema } from '~/data/schemas/faq-page';
 import { productReviewSchema } from '~/data/schemas/product-review';
 import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
 import { webPageSchema } from '~/data/schemas/webpage';
+import { serviceOfferSchemas } from '~/data/schemas/services-offer';
 import { SITE } from '~/data/site';
 import { getCollection } from 'astro:content';
 
@@ -52,6 +53,7 @@ const schemas = [
   faqPageSchema(homepageFaqs),
   productReviewSchema(testimonials.map((t) => ({ quote: t.data.quote, name: t.data.name, role: t.data.role }))),
   breadcrumbSchema([{ label: 'Home', href: '/' }]),
+  ...serviceOfferSchemas,
 ];
 ---
 <BaseLayout
