@@ -12,8 +12,9 @@ interface Props {
   ogType?: 'website'|'article'; noindex?: boolean;
   active?: 'home'|'about'|'services'|'contact';
   schemas?: unknown[]; preloadHero?: boolean;
+  keywords?: string; twitterSite?: string;
 }
-const { title, description, canonical, ogImage, ogType, noindex, active, schemas = [], preloadHero = false } = Astro.props;
+const { title, description, canonical, ogImage, ogType, noindex, active, schemas = [], preloadHero = false, keywords, twitterSite } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -23,7 +24,7 @@ const { title, description, canonical, ogImage, ogType, noindex, active, schemas
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.facebook.com https://connect.facebook.net; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <BaseSEO {title} {description} {canonical} {ogImage} {ogType} {noindex} />
+    <BaseSEO {title} {description} {canonical} {ogImage} {ogType} {noindex} {keywords} {twitterSite} />
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload />
     {preloadHero && <link rel="preload" as="image" href="/images/hero-phone.png" fetchpriority="high" />}
