@@ -10,91 +10,15 @@ Disallow: /private/
 Disallow: /api/
 Crawl-delay: 1
 
-# Priority search crawlers — no delay
+# Priority search crawlers — explicit Disallow + no crawl-delay
 User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
 User-agent: Googlebot-Image
-Allow: /
-Crawl-delay: 0
-
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 0
-
-# Google Ads bots
-User-agent: AdsBot-Google
-Allow: /
-
-User-agent: AdsBot-Google-Mobile
-Allow: /
-
-# OpenAI / ChatGPT
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-# Anthropic / Claude
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-# Perplexity
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Perplexity-User
-Allow: /
-
-# Google AI (Gemini training / extended)
-User-agent: Google-Extended
-Allow: /
-
-# Apple
-User-agent: Applebot
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-# ByteDance / TikTok
-User-agent: Bytespider
-Allow: /
-
-# Amazon Alexa
-User-agent: Amazonbot
-Allow: /
-
-# Meta
-User-agent: Meta-ExternalAgent
-Allow: /
-
-# Cohere
-User-agent: cohere-ai
-Allow: /
-
-# Common Crawl (used by many AI training datasets)
-User-agent: CCBot
-Allow: /
-
-# You.com
-User-agent: YouBot
-Allow: /
-
-# DuckDuckGo
-User-agent: DuckDuckBot
-Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
 
 Sitemap: https://mediapro.work/sitemap-index.xml
-Sitemap: https://mediapro.work/llms.txt
