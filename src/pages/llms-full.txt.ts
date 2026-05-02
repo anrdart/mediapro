@@ -3,7 +3,8 @@ import { SITE } from '~/data/site';
 import { getCollection } from 'astro:content';
 
 export const GET: APIRoute = async () => {
-  const services = await getCollection('services');
+  const services = (await getCollection('services'))
+    .sort((a, b) => a.data.num.localeCompare(b.data.num));
   const faqs = await getCollection('faqs');
 
   const servicesBlock = services
