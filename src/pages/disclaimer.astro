@@ -2,8 +2,16 @@
 import SubpageLayout from '~/layouts/SubpageLayout.astro';
 import { DISCLAIMER_SECTIONS, DISCLAIMER_HERO } from '~/_extracted/disclaimer-sections';
 import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+import { webPageSchema } from '~/data/schemas/webpage';
 
-const schemas = [breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Disclaimer' }])];
+const schemas = [
+  breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Disclaimer' }]),
+  webPageSchema({
+    url: 'https://mediapro.work/disclaimer',
+    title: 'Disclaimer — Media Pro Digital Marketing',
+    description: 'Important information about service guarantees, third-party platform limitations, and the nature of digital marketing outcomes.',
+  }),
+];
 ---
 <SubpageLayout
   title="Disclaimer — Media Pro Digital Marketing"

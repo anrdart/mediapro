@@ -2,6 +2,7 @@
 import SubpageLayout from '~/layouts/SubpageLayout.astro';
 import Icon from '~/components/icons/Icon.astro';
 import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+import { webPageSchema } from '~/data/schemas/webpage';
 import {
   CONTACT_CARDS,
   CONTACT_HERO,
@@ -13,10 +14,12 @@ import {
 const schemas = [
   breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Contact' }]),
   {
-    '@context': 'https://schema.org',
-    '@type': 'ContactPage',
-    name: 'Contact Media Pro',
-    url: 'https://mediapro.work/contact',
+    ...webPageSchema({
+      type: 'ContactPage',
+      url: 'https://mediapro.work/contact',
+      title: 'Contact Media Pro — Free Digital Marketing Consultation',
+      description: 'Get in touch with Media Pro for a free consultation. We respond within 4 working hours. WhatsApp, email, or send a project brief.',
+    }),
     mainEntity: { '@id': 'https://mediapro.work/#organization' },
   },
 ];

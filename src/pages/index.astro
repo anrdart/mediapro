@@ -15,6 +15,7 @@ import { serviceCatalogSchema } from '~/data/schemas/service-catalog';
 import { faqPageSchema } from '~/data/schemas/faq-page';
 import { productReviewSchema } from '~/data/schemas/product-review';
 import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+import { webPageSchema } from '~/data/schemas/webpage';
 import { getCollection } from 'astro:content';
 
 const testimonials = await getCollection('testimonials');
@@ -39,6 +40,12 @@ const homepageFaqs = [
 ];
 
 const schemas = [
+  webPageSchema({
+    url: 'https://mediapro.work/',
+    title: 'Media Pro — Global Digital Marketing Agency | SEO, Ads & Web Dev',
+    description: 'Premium global digital marketing agency. Web Development, Google Ads, Meta Ads, SEO & Consulting. Trusted by 25,000+ brands across 40+ countries. 10+ years experience, 4.7 rating.',
+    speakable: true,
+  }),
   professionalServiceSchema,
   serviceCatalogSchema,
   faqPageSchema(homepageFaqs),

@@ -2,8 +2,16 @@
 import SubpageLayout from '~/layouts/SubpageLayout.astro';
 import { TERMS_SECTIONS, TERMS_HERO } from '~/_extracted/terms-sections';
 import { breadcrumbSchema } from '~/data/schemas/breadcrumb';
+import { webPageSchema } from '~/data/schemas/webpage';
 
-const schemas = [breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Terms' }])];
+const schemas = [
+  breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Terms' }]),
+  webPageSchema({
+    url: 'https://mediapro.work/terms',
+    title: 'Terms of Service & Privacy Policy — Media Pro',
+    description: 'Combined Terms of Service and Privacy Policy for Media Pro Creative Limited. Acceptance, services, data, payments, IP, liability, and your rights.',
+  }),
+];
 ---
 <SubpageLayout
   title="Terms of Service & Privacy Policy — Media Pro"
