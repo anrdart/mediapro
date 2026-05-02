@@ -6,7 +6,7 @@ export const serviceOfferSchemas = [
     '@type': 'Service',
     '@id': `${SITE.url}/#service-seo`,
     name: 'SEO Services',
-    description: "Media Pro's SEO service covers technical audits, on-page optimization, link building, and content strategy. Long-term retainers start at USD 1,200/month with meaningful improvements visible in 3–6 months.",
+    description: "Media Pro's SEO service covers technical audits, on-page optimization, link building, and content strategy. Meaningful improvements are visible in 3–6 months.",
     provider: { '@type': 'Organization', '@id': `${SITE.url}/#organization` },
     areaServed: 'Worldwide',
     offers: {

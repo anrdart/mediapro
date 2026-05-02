@@ -22,3 +22,4 @@ Disallow: /private/
 Disallow: /api/
 
 Sitemap: https://mediapro.work/sitemap-index.xml
+Sitemap: https://mediapro.work/llms.txt
