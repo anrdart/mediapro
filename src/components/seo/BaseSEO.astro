@@ -9,9 +9,8 @@ interface Props {
   ogType?: 'website' | 'article';
   noindex?: boolean;
   keywords?: string;
-  twitterSite?: string;
 }
-const { title, description, canonical = Astro.url.pathname, ogImage = SITE.ogImage, ogType = 'website', noindex = false, keywords, twitterSite } = Astro.props;
+const { title, description, canonical = Astro.url.pathname, ogImage = SITE.ogImage, ogType = 'website', noindex = false, keywords } = Astro.props;
 const canonicalURL = new URL(canonical, SITE.url).toString();
 const ogImageURL = new URL(ogImage, SITE.url).toString();
 ---
@@ -23,12 +22,11 @@ const ogImageURL = new URL(ogImage, SITE.url).toString();
 <meta name="geo.region" content={SITE.region} />
 <meta name="geo.placename" content="Worldwide" />
 <meta name="theme-color" content={SITE.themeColor} />
-<meta name="abstract" content={description} />
-<meta name="subject" content="Digital Marketing Services" />
-<meta name="classification" content="Business/Digital Marketing" />
-<meta name="category" content="Digital Marketing" />
+<meta name="abstract" content={SITE.entityAbstract} />
+<meta name="subject" content={SITE.subject} />
+<meta name="classification" content={SITE.classification} />
+<meta name="category" content={SITE.category} />
 {keywords && <meta name="keywords" content={keywords} />}
-{twitterSite && <meta name="twitter:site" content={twitterSite} />}
 <link rel="canonical" href={canonicalURL} />
 <link rel="alternate" hreflang="en" href={canonicalURL} />
 <link rel="alternate" hreflang="x-default" href={canonicalURL} />

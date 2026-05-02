@@ -6,7 +6,7 @@ interface Props {
   active?: 'home'|'about'|'services'|'contact'; schemas?: unknown[];
   pageTitle: string; pageEyebrow?: string; pageLede?: string;
   crumbs: { label: string; href?: string }[]; noindex?: boolean;
-  keywords?: string; twitterSite?: string;
+  keywords?: string;
 }
 const { pageTitle, pageEyebrow, pageLede, crumbs, ...rest } = Astro.props;
 ---
