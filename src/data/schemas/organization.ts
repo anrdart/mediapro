@@ -48,10 +48,12 @@ export const organizationSchema = {
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    '@id': `${SITE.url}/#service-catalog`,
     name: 'Digital Marketing Services',
   },
-  award: `${SITE.stats.rating}/5 Client Rating from ${SITE.stats.reviewCount.toLocaleString('en-US')}+ verified reviews`,
-  paymentAccepted: 'Credit Card, Bank Transfer, PayPal, Wise, SWIFT',
-  currenciesAccepted: 'USD',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: SITE.stats.rating,
+    reviewCount: SITE.stats.reviewCount.toString(),
+    bestRating: '5',
+  },
 } as const;

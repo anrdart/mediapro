@@ -8,7 +8,7 @@ export const websiteSchema = {
   url: SITE.url,
   description: SITE.description,
   inLanguage: SITE.locale,
-  copyrightYear: new Date().getFullYear().toString(),
+  copyrightYear: new Date().getFullYear(),
   copyrightHolder: { '@type': 'Organization', '@id': `${SITE.url}/#organization` },
   publisher: { '@type': 'Organization', '@id': `${SITE.url}/#organization`, name: SITE.legalName },
 } as const;

@@ -33,10 +33,10 @@ export const professionalServiceSchema = {
     'Australia',
     'Southeast Asia',
     'Asia-Pacific',
+    'Worldwide',
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    '@id': `${SITE.url}/#service-catalog`,
     name: 'Digital Marketing Services',
   },
 } as const;
