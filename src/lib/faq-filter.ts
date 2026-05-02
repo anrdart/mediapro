@@ -10,3 +10,5 @@ cats.forEach((c) => {
     });
   });
 });
+
+export {};

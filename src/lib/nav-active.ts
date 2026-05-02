@@ -44,3 +44,5 @@ if (sections.length) {
   );
   sections.forEach((el) => io.observe(el));
 }
+
+export {};

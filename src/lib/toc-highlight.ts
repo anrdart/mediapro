@@ -16,3 +16,5 @@ if (links.length && sections.length) {
   );
   sections.forEach((s) => io.observe(s));
 }
+
+export {};

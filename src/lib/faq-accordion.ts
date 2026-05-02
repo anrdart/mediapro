@@ -7,3 +7,5 @@ document.querySelectorAll<HTMLButtonElement>('.faq-q').forEach((btn) => {
     btn.setAttribute('aria-expanded', String(!wasOpen));
   });
 });
+
+export {};

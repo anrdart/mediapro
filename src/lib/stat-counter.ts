@@ -36,3 +36,5 @@ document.querySelectorAll<HTMLElement>('[data-stat-target]').forEach((el) => {
   );
   io.observe(el);
 });
+
+export {};

@@ -10,3 +10,5 @@ const io = new IntersectionObserver(
   { rootMargin: '0px 0px -8% 0px', threshold: 0.05 }
 );
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+export {};

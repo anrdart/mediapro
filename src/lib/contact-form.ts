@@ -44,3 +44,5 @@ if (form) {
     if (success) success.classList.add('show');
   });
 }
+
+export {};
