@@ -1,18 +1,289 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import { LOCALES, useTranslations } from '~/i18n/index';
+import type { Lang } from '~/i18n/index';
+
+const allStrings: Record<string, Record<string, string>> = {};
+for (const locale of LOCALES) {
+  const t = await useTranslations(locale as Lang);
+  allStrings[locale] = {
+    eyebrow: t('p404.eyebrow'),
+    heading: t('p404.heading'),
+    lede: t('p404.lede'),
+    btn: t('p404.btn'),
+    btn_contact: t('p404.btn_contact'),
+    nav_home: t('nav.home'),
+    nav_about: t('nav.about'),
+    nav_services: t('nav.services'),
+    nav_contact: t('nav.contact'),
+    nav_cta: t('nav.cta'),
+    nav_skip: t('nav.skip'),
+    footer_tagline: t('footer.tagline'),
+    footer_col_services: t('footer.col_services'),
+    footer_col_company: t('footer.col_company'),
+    footer_col_contact: t('footer.col_contact'),
+    footer_link_terms: t('footer.link_terms'),
+    footer_link_disclaimer: t('footer.link_disclaimer'),
+    footer_link_faq: t('footer.link_faq'),
+    footer_link_contact: t('footer.link_contact'),
+    footer_wa_label: t('footer.wa_label'),
+    footer_copyright: t('footer.copyright'),
+  };
+}
+
+const t = await useTranslations('en');
 ---
 <BaseLayout
-  title="Page Not Found — Media Pro"
-  description="The page you were looking for doesn't exist. Head back to the homepage or contact us."
+  title={t('meta.404_title')}
+  description={t('meta.404_desc')}
   noindex={true}
   lang="en"
 >
-  <section class="hero" style="text-align:center;">
-    <div class="container">
-      <span class="eyebrow" style="justify-content:center;">404</span>
-      <h1 class="h-display" style="margin:24px auto;max-width:18ch;">Lost in the digital noise?</h1>
-      <p class="lede" style="margin:0 auto 36px;max-width:48ch;">The page you were looking for doesn't exist. Let's get you back on track.</p>
-      <a href="/" class="btn btn-primary">Back to home</a>
+  <section class="p404">
+    <div class="p404-grid" aria-hidden="true"></div>
+    <div class="p404-ring" aria-hidden="true"></div>
+    <div class="container p404-inner">
+      <div class="p404-code reveal" aria-hidden="true">
+        <span class="p404-digit">4</span><span class="p404-zero">0</span><span class="p404-digit">4</span>
+      </div>
+      <span id="p404-eyebrow" class="eyebrow reveal reveal-delay-1" style="justify-content:center;">{t('p404.eyebrow')}</span>
+      <h1 id="p404-heading" class="h-section reveal reveal-delay-2" style="text-align:center;margin:20px auto 0;max-width:20ch;">{t('p404.heading')}</h1>
+      <p id="p404-lede" class="lede reveal reveal-delay-3" style="text-align:center;margin:16px auto 32px;max-width:48ch;">{t('p404.lede')}</p>
+      <div class="p404-actions reveal reveal-delay-4">
+        <a id="p404-btn" href="/" class="btn btn-primary">{t('p404.btn')}</a>
+        <a id="p404-btn-contact" href="/#contact" class="btn btn-ghost">{t('p404.btn_contact')}</a>
+      </div>
     </div>
   </section>
+
+  <script is:inline define:vars={{ allStrings }}>
+    (function () {
+      var seg = location.pathname.split('/')[1];
+      var lang = ['ar', 'id', 'zh'].indexOf(seg) !== -1 ? seg : 'en';
+      if (lang === 'en') return;
+
+      var s = allStrings[lang];
+      if (!s) return;
+
+      var home = '/' + lang;
+      var contact = home + '/contact';
+
+      document.documentElement.lang = lang;
+      if (lang === 'ar') document.documentElement.dir = 'rtl';
+
+      // 404 content
+      document.getElementById('p404-eyebrow').textContent = s.eyebrow;
+      document.getElementById('p404-heading').textContent = s.heading;
+      document.getElementById('p404-lede').textContent = s.lede;
+      var btnHome = document.getElementById('p404-btn');
+      btnHome.textContent = s.btn;
+      btnHome.href = home;
+      var btnContact = document.getElementById('p404-btn-contact');
+      btnContact.textContent = s.btn_contact;
+      btnContact.href = home + '/#contact';
+
+      // Nav links (desktop + sidebar)
+      var navLabels = [s.nav_home, s.nav_about, s.nav_services, s.nav_contact];
+      var navHrefs = [home, home + '#about', home + '#services', contact];
+      document.querySelectorAll('.nav-links a, .sidebar-links a').forEach(function (a, i) {
+        var idx = i % 4;
+        a.textContent = navLabels[idx];
+        a.href = navHrefs[idx];
+      });
+
+      // CTA buttons (header + sidebar)
+      document.querySelectorAll('.nav-cta, .sidebar-cta-btn').forEach(function (a) {
+        var svg = a.querySelector('svg');
+        a.textContent = s.nav_cta + ' ';
+        if (svg) a.appendChild(svg);
+        a.href = contact;
+      });
+
+      // Skip link
+      var skip = document.querySelector('.skip-link');
+      if (skip) skip.textContent = s.nav_skip;
+
+      // Lang switcher current indicator
+      document.querySelectorAll('.lang-switcher').forEach(function (el) {
+        el.dataset.current = lang;
+      });
+      document.querySelectorAll('.lang-code').forEach(function (el) {
+        el.textContent = lang.toUpperCase();
+      });
+      document.querySelectorAll('.lang-option').forEach(function (btn) {
+        var isActive = btn.dataset.lang === lang;
+        btn.classList.toggle('is-current', isActive);
+        btn.setAttribute('aria-selected', String(isActive));
+        var check = btn.querySelector('svg');
+        if (isActive && !check) {
+          btn.insertAdjacentHTML('beforeend', '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>');
+        } else if (!isActive && check) {
+          check.remove();
+        }
+      });
+
+      // Footer
+      var brand = document.querySelector('.brand-footer');
+      if (brand) brand.href = home;
+      var tag = document.querySelector('.footer-tag');
+      if (tag) tag.textContent = s.footer_tagline;
+
+      var colTitles = document.querySelectorAll('.footer-col-title');
+      if (colTitles[0]) colTitles[0].textContent = s.footer_col_services;
+      if (colTitles[1]) colTitles[1].textContent = s.footer_col_company;
+      if (colTitles[2]) colTitles[2].textContent = s.footer_col_contact;
+
+      // Footer company links
+      var companyLinks = colTitles[1] && colTitles[1].parentElement.querySelectorAll('a');
+      if (companyLinks) {
+        var fLabels = [s.footer_link_terms, s.footer_link_disclaimer, s.footer_link_faq, s.footer_link_contact];
+        var fHrefs = [home + '/terms', home + '/disclaimer', home + '/faq', contact];
+        companyLinks.forEach(function (a, i) {
+          a.textContent = fLabels[i];
+          a.href = fHrefs[i];
+        });
+      }
+
+      // Footer WhatsApp label
+      var waLink = colTitles[2] && colTitles[2].parentElement.querySelectorAll('a')[1];
+      if (waLink) {
+        var phone = waLink.textContent.split('—')[0].trim();
+        waLink.textContent = phone + ' — ' + s.footer_wa_label;
+      }
+
+      // Copyright
+      var copy = document.querySelector('.footer-bottom > span');
+      if (copy) copy.textContent = s.footer_copyright;
+    })();
+  </script>
 </BaseLayout>
+
+<style>
+  .p404 {
+    position: relative;
+    min-height: calc(100dvh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(120px, 14vw, 180px) 0 clamp(60px, 8vw, 100px);
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 10%, rgba(255, 184, 4, 0.10), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(195, 40, 47, 0.08), transparent 60%),
+      var(--bg);
+  }
+
+  .p404-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at center, black 15%, transparent 65%);
+    opacity: 0.45;
+  }
+
+  .p404-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: clamp(300px, 40vw, 500px);
+    height: clamp(300px, 40vw, 500px);
+    transform: translate(-50%, -55%);
+    border: 1.5px dashed var(--line-strong);
+    border-radius: 50%;
+    animation: p404-spin 50s linear infinite;
+    opacity: 0.5;
+  }
+
+  .p404-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .p404-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .p404-digit,
+  .p404-zero {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(100px, 18vw, 200px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+  }
+
+  .p404-digit {
+    color: var(--ink);
+    opacity: 0.08;
+  }
+
+  .p404-zero {
+    background: linear-gradient(135deg, var(--red) 30%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 24px rgba(195, 40, 47, 0.18));
+  }
+
+  .p404-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @keyframes p404-spin {
+    to { transform: translate(-50%, -55%) rotate(360deg); }
+  }
+
+  [data-theme="dark"] .p404 {
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 10%, rgba(255, 184, 4, 0.06), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(195, 40, 47, 0.10), transparent 60%),
+      var(--bg);
+  }
+
+  [data-theme="dark"] .p404-digit {
+    opacity: 0.06;
+  }
+
+  [data-theme="dark"] .p404-zero {
+    filter: drop-shadow(0 4px 30px rgba(224, 56, 64, 0.25));
+  }
+
+  @media (max-width: 640px) {
+    .p404 {
+      min-height: calc(100dvh - 80px);
+      padding-top: clamp(100px, 20vw, 140px);
+    }
+    .p404-actions {
+      flex-direction: column;
+      width: 100%;
+      max-width: 280px;
+    }
+    .p404-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .p404-ring {
+      width: 240px;
+      height: 240px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .p404-ring { animation: none; }
+  }
+</style>

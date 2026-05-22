@@ -181,9 +181,10 @@
     "toc_h": "Daftar Isi"
   },
   "p404": {
-    "eyebrow": "404",
+    "eyebrow": "Halaman Tidak Ditemukan",
     "heading": "Tersesat di kebisingan digital?",
-    "lede": "Halaman yang Anda cari tidak ada. Mari kembali ke jalur.",
-    "btn": "Kembali ke beranda"
+    "lede": "Halaman yang Anda cari tidak ada atau telah dipindahkan. Mari kembali ke jalur.",
+    "btn": "Kembali ke beranda",
+    "btn_contact": "Hubungi kami"
   }
 }

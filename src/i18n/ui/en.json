@@ -181,9 +181,10 @@
     "toc_h": "Contents"
   },
   "p404": {
-    "eyebrow": "404",
+    "eyebrow": "Page Not Found",
     "heading": "Lost in the digital noise?",
-    "lede": "The page you were looking for doesn't exist. Let's get you back on track.",
-    "btn": "Back to home"
+    "lede": "The page you were looking for doesn't exist or has been moved. Let's get you back on track.",
+    "btn": "Back to home",
+    "btn_contact": "Contact us"
   }
 }
