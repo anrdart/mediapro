@@ -90,7 +90,7 @@ export default defineConfig({
   env: {
     schema: {
       PUBLIC_SITE_URL: envField.string({ context: 'client', access: 'public', default: 'https://mediapro.work' }),
-      PUBLIC_WA_NUMBER: envField.string({ context: 'client', access: 'public', default: '6285129992227' }),
+      PUBLIC_WA_NUMBER: envField.string({ context: 'client', access: 'public', default: '19377722944' }),
       PUBLIC_EMAIL: envField.string({ context: 'client', access: 'public', default: 'mediapro@mediapro.work' }),
       PUBLIC_GA_ID: envField.string({ context: 'client', access: 'public', optional: true }),
       PUBLIC_META_PIXEL_ID: envField.string({ context: 'client', access: 'public', optional: true }),
