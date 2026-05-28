@@ -31,7 +31,7 @@ export const TIMELINE_OPTIONS: TimelineOption[] = [
 
 export const CONTACT_CARDS: ContactCard[] = [
   { icon: 'email', label: 'Email', value: 'admin@mediapro.work', href: 'mailto:admin@mediapro.work' },
-  { icon: 'whatsapp', label: 'WhatsApp', value: '+62 851-2999-2227', href: `https://wa.me/6285129992227?text=${encodeURIComponent("Hi Media Pro, I'd like to discuss a project.")}`, external: true },
+  { icon: 'whatsapp', label: 'WhatsApp', value: '+1 (937) 772-2944', href: `https://wa.me/19377722944?text=${encodeURIComponent("Hi Media Pro, I'd like to discuss a project.")}`, external: true },
   { icon: 'location', label: 'Studio', value: 'Remote-first, global' },
 ];
 
