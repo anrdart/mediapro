@@ -12,7 +12,7 @@ export const SITE = {
   email: 'admin@mediapro.work',
   phone: '+1 (937) 772-2944',
   phoneDisplay: '+1 (937) 772-2944',
-  waNumber: '+1(937)7722944',
+  waNumber: '+9377722944',
   waLink: 'https://wa.me/19377722944',
   hours: '09:00–19:00 + Global · 24/7 async',
   language: 'en',
