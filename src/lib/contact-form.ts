@@ -58,7 +58,7 @@ if (form) {
       timeline ? `Timeline: ${timeline}` : null,
       ``, `Message:`, message,
     ].filter(Boolean).join('\n');
-    const wa = `https://wa.me/6285129992227?text=${encodeURIComponent(body)}`;
+    const wa = `https://wa.me/+19377722944?text=${encodeURIComponent(body)}`;
     window.open(wa, '_blank', 'noopener,noreferrer');
     form.classList.add('submitted');
     const success = form.querySelector<HTMLElement>('.success-msg');
