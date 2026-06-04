@@ -12,8 +12,17 @@ function persist(theme: Theme) {
   }
 }
 
+function syncThemeImages(theme: Theme) {
+  const key = theme === 'dark' ? 'srcDark' : 'srcLight';
+  document.querySelectorAll<HTMLImageElement>('.theme-img').forEach((img) => {
+    const src = img.dataset[key];
+    if (src && img.src !== src) img.src = src;
+  });
+}
+
 function applyTheme(theme: Theme) {
   document.documentElement.setAttribute('data-theme', theme);
+  syncThemeImages(theme);
   persist(theme);
 }
 
@@ -40,8 +49,10 @@ if (button) {
     button.setAttribute('aria-pressed', String(next === 'dark'));
   });
 
-  // Initial aria-pressed state matches current theme
-  button.setAttribute('aria-pressed', String(getCurrentTheme() === 'dark'));
+  // Initial state
+  const initial = getCurrentTheme();
+  button.setAttribute('aria-pressed', String(initial === 'dark'));
+  syncThemeImages(initial);
 }
 
 // Sync across open tabs
@@ -49,6 +60,7 @@ window.addEventListener('storage', (e) => {
   if (e.key !== 'theme' || !e.newValue) return;
   const next = e.newValue as Theme;
   document.documentElement.setAttribute('data-theme', next);
+  syncThemeImages(next);
   button?.setAttribute('aria-pressed', String(next === 'dark'));
 });
 

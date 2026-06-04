@@ -46,21 +46,18 @@ const waAboutUrl = waUrl(`Hi Media Pro, I'd like to learn more about your digita
 
       <Reveal delay={2} class="about-visual">
         <div class="lazy-img">
-          <picture>
-            <source
-              srcset="/images/about-mockup-dark.webp"
-              media="(prefers-color-scheme: dark)"
-            />
-            <img
-              src="/images/about-mockup.webp"
-              alt="Media Pro mobile app showcasing digital marketing analytics"
-              width="414"
-              height="600"
-              loading="lazy"
-              decoding="async"
-              onload="this.closest('.lazy-img').classList.add('loaded')"
-            />
-          </picture>
+          <img
+            class="theme-img"
+            src="/images/about-mockup.webp"
+            data-src-light="/images/about-mockup.webp"
+            data-src-dark="/images/about-mockup-dark.webp"
+            alt="Media Pro mobile app showcasing digital marketing analytics"
+            width="414"
+            height="600"
+            loading="lazy"
+            decoding="async"
+            onload="this.closest('.lazy-img').classList.add('loaded')"
+          />
         </div>
       </Reveal>
     </div>

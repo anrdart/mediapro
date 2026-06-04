@@ -14,21 +14,18 @@ const waConsultUrl = waUrl(`Hi Media Pro, I'd like a free consultation about you
     <div class="services-intro-grid">
       <Reveal class="visual">
         <div class="lazy-img">
-          <picture>
-            <source
-              srcset="/images/services-visual-dark.webp"
-              media="(prefers-color-scheme: dark)"
-            />
-            <img
-              src="/images/services-visual.webp"
-              alt="Strategy in action — Media Pro digital marketing"
-              width="600"
-              height="600"
-              loading="lazy"
-              decoding="async"
-              onload="this.closest('.lazy-img').classList.add('loaded')"
-            />
-          </picture>
+          <img
+            class="theme-img"
+            src="/images/services-visual.webp"
+            data-src-light="/images/services-visual.webp"
+            data-src-dark="/images/services-visual-dark.webp"
+            alt="Strategy in action — Media Pro digital marketing"
+            width="600"
+            height="600"
+            loading="lazy"
+            decoding="async"
+            onload="this.closest('.lazy-img').classList.add('loaded')"
+          />
         </div>
       </Reveal>
 
